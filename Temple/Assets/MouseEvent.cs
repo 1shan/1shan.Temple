@@ -13,11 +13,7 @@ public class MouseEvent : MonoBehaviour {
 	
 	}
 	void MouseCreatCP(){
-		if (Input.GetMouseButtonDown(0)) {
-			Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
-			if (Physics.Raycast (ray))
-				Instantiate (CPpoint, transform.position, transform.position);
-		}
+		
 	}
 
 }

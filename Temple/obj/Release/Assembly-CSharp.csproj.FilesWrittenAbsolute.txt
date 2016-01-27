@@ -1,0 +1,17 @@
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/UnityEngine.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/UnityEditor.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/UnityEngine.Networking.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/UnityEngine.UI.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/Mono.Cecil.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/Unity.SerializationLogic.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/Unity.DataContract.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/ICSharpCode.NRefactory.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/Unity.UNetWeaver.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/Unity.UNetWeaver.dll.mdb
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/Unity.CecilTools.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/Mono.Cecil.Pdb.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/Mono.Cecil.Mdb.dll
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/Assembly-CSharp.dll.mdb
+/Users/Shan/Documents/1shan.Temple/Temple/Temp/bin/Release/Assembly-CSharp.dll
+/Users/Shan/Documents/1shan.Temple/Temple/obj/Release/Assembly-CSharp.dll
+/Users/Shan/Documents/1shan.Temple/Temple/obj/Release/Assembly-CSharp.dll.mdb
