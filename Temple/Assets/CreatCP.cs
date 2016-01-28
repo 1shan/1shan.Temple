@@ -7,12 +7,14 @@ public class CreatCP : MonoBehaviour {
 	public GameObject CP1;
 	public GameObject CP2;
 	public GameObject CP3;
+	public Color c1 = Color.white;
 	public List<Transform> controlPointsList = new List<Transform>();
 	public List<Vector3> totalPointList = new List<Vector3>();
 	private LineRenderer lineRenderer;
 
 	// Use this for initialization
 	void Start () {
+		
 		lineRenderer = GetComponent<LineRenderer>();
 		CalCatmullRomSpline();
 		Renderspline();
@@ -33,49 +35,46 @@ public class CreatCP : MonoBehaviour {
 		Vector3 cp2pos = CP2.transform.position;
 		Vector3 cp3pos = CP3.transform.position;
 		Vector3 lastpos = Vector3.zero;
-		Debug.Log (cp0pos);
 
 
-//		for (float t = 0; t < 1; t += 0.1f) {
-//			Vector3 newpos = ReturnCatmullRom (t, cp0pos, cp1pos, cp2pos, cp3pos);
-//			if (t == 0) {
-//				lastpos = cp1pos;
-//				totalPointList.Add (lastpos);
-//				continue;
-//			}
+		for (float t = 0; t < 1; t += 0.1f) {
+			Vector3 newpos = ReturnCatmullRom (t, (cp0pos*2)-(cp1pos), cp0pos, cp1pos, cp2pos);
+			if (t == 0) {
+				lastpos = cp0pos;
+				totalPointList.Add (lastpos);
+				continue;
+			}
+
+			totalPointList.Add (newpos);
+			lastpos = newpos;
+
+		}
 //
-//			totalPointList.Add (newpos);
-//			lastpos = newpos;
-//
-//		}
-//		lastpos = Vector3.zero;
-//		Vector3 cp4pos = (cp0pos * 2) - (cp1pos);
-//		for (float t = 0; t < 1; t += 0.1f) {
-//			Vector3 newpos = ReturnCatmullRom (t, cp4pos, cp0pos, cp1pos, cp2pos);
-//			if (t == 0) {
-//				lastpos = cp1pos;
-//				totalPointList.Add (lastpos);
-//				continue;
-//			}
-//
-//			totalPointList.Add (newpos);
-//			lastpos = newpos;
-//
-//		}
-//		lastpos = Vector3.zero;
-//
-//		for (float t = 0; t < 1; t += 0.1f) {
-//			Vector3 newpos = ReturnCatmullRom (t, cp1pos, cp2pos, cp3pos, (cp3pos*2)-cp2pos);
-//			if (t == 0) {
-//				lastpos = cp1pos;
-//				totalPointList.Add (lastpos);
-//				continue;
-//			}
-//
-//			totalPointList.Add (newpos);
-//			lastpos = newpos;
-//
-//		}
+		for (float t = 0; t < 1; t += 0.1f) {
+			Vector3 newpos = ReturnCatmullRom (t, cp0pos, cp1pos, cp2pos, cp3pos);
+			if (t == 0) {
+				lastpos = cp1pos;
+				totalPointList.Add (lastpos);
+				continue;
+			}
+
+			totalPointList.Add (newpos);
+			lastpos = newpos;
+
+		}
+
+		for (float t = 0; t < 1; t += 0.1f) {
+			Vector3 newpos = ReturnCatmullRom (t, cp1pos, cp2pos, cp3pos, (cp3pos*2)-cp2pos);
+			if (t == 0) {
+				lastpos = cp2pos;
+				totalPointList.Add (lastpos);
+				continue;
+			}
+
+			totalPointList.Add (newpos);
+			lastpos = newpos;
+
+		}
 
 
 	}
@@ -92,6 +91,8 @@ public class CreatCP : MonoBehaviour {
 	}
 
 	void Renderspline(){
+		Debug.Log (totalPointList);
+		lineRenderer.SetVertexCount (totalPointList.Count);
 		for (int i = 0; i < totalPointList.Count; i++) {
 			lineRenderer.SetPosition (i, totalPointList [i]);
 			
