@@ -33,19 +33,51 @@ public class CreatCP : MonoBehaviour {
 		Vector3 cp2pos = CP2.transform.position;
 		Vector3 cp3pos = CP3.transform.position;
 		Vector3 lastpos = Vector3.zero;
+		Debug.Log (cp0pos);
 
-		for (float t = 0; t < 1; t += 0.1f) {
-			Vector3 newpos = ReturnCatmullRom (t, cp0pos, cp1pos, cp2pos, cp3pos);
-			if (t == 0) {
-				lastpos = cp1pos;
-				totalPointList.Add (lastpos);
-				continue;
-			}
 
-			totalPointList.Add (newpos);
-			lastpos = newpos;
+//		for (float t = 0; t < 1; t += 0.1f) {
+//			Vector3 newpos = ReturnCatmullRom (t, cp0pos, cp1pos, cp2pos, cp3pos);
+//			if (t == 0) {
+//				lastpos = cp1pos;
+//				totalPointList.Add (lastpos);
+//				continue;
+//			}
+//
+//			totalPointList.Add (newpos);
+//			lastpos = newpos;
+//
+//		}
+//		lastpos = Vector3.zero;
+//		Vector3 cp4pos = (cp0pos * 2) - (cp1pos);
+//		for (float t = 0; t < 1; t += 0.1f) {
+//			Vector3 newpos = ReturnCatmullRom (t, cp4pos, cp0pos, cp1pos, cp2pos);
+//			if (t == 0) {
+//				lastpos = cp1pos;
+//				totalPointList.Add (lastpos);
+//				continue;
+//			}
+//
+//			totalPointList.Add (newpos);
+//			lastpos = newpos;
+//
+//		}
+//		lastpos = Vector3.zero;
+//
+//		for (float t = 0; t < 1; t += 0.1f) {
+//			Vector3 newpos = ReturnCatmullRom (t, cp1pos, cp2pos, cp3pos, (cp3pos*2)-cp2pos);
+//			if (t == 0) {
+//				lastpos = cp1pos;
+//				totalPointList.Add (lastpos);
+//				continue;
+//			}
+//
+//			totalPointList.Add (newpos);
+//			lastpos = newpos;
+//
+//		}
 
-		}
+
 	}
 
 	Vector3 ReturnCatmullRom(float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3) {
