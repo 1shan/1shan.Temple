@@ -154,4 +154,9 @@ public class CatMullRomManage : MonoBehaviour
 		return auxcp;
 
 	}
+	public void DeleteCP(GameObject obj){
+		
+		Destroy (obj);
+	
+	}
 }

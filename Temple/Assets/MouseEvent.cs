@@ -9,6 +9,7 @@ public class MouseEvent : MonoBehaviour
 	public GameObject ColliderPlane;
 	public CatMullRomManage cmrmanage;
 	public ButtonEvent buttonevent;
+	public GameObject chooseOBJ = null;
 
 	// Use this for initialization
 	void Start ()
@@ -24,6 +25,29 @@ public class MouseEvent : MonoBehaviour
 			MouseCreatCP ();
 		}
 
+		if (Input.GetMouseButtonDown (0) && buttonevent.ismove ) {
+			if (chooseOBJ) {
+				Debug.Log (chooseOBJ);
+				MouseMoveCP ();
+
+			} else {
+				Vector3 mouse_pos = Input.mousePosition;
+				mouse_pos.z = 0.0f;
+				Ray ray = Camera.main.ScreenPointToRay (mouse_pos);
+				RaycastHit hit;
+				if (Physics.Raycast (ray, out hit)) {
+					chooseOBJ = hit.collider.gameObject;
+					MouseMoveCP ();
+					Debug.Log (chooseOBJ);
+				}
+			}
+		}
+		if (Input.GetMouseButtonDown (0) && buttonevent.isdel ) {
+			MouseDeleteCP ();
+
+		}
+
+
 
 		
 			
@@ -31,7 +55,7 @@ public class MouseEvent : MonoBehaviour
 
 	}
 
-	void MouseCreatCP (){
+	public void MouseCreatCP (){
 		Vector3 mouse_pos = Input.mousePosition;
 		mouse_pos.z = 0.0f;
 		Ray ray = Camera.main.ScreenPointToRay (mouse_pos);
@@ -42,6 +66,29 @@ public class MouseEvent : MonoBehaviour
 			//Debug.Log (copy.transform.position);
 		}
 			
+	}
+	public void MouseMoveCP(){
+		Vector3 mouse_pos = Input.mousePosition;
+		mouse_pos.z = 0.0f;
+		Ray ray = Camera.main.ScreenPointToRay (mouse_pos);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit)) {
+			cmrmanage.MoveCP (hit.collider.gameObject,hit.point);
+			Debug.Log (mouse_pos);
+			Debug.Log (hit.point);
+		}
+
+		
+	}
+	public void MouseDeleteCP(){
+		Ray ray = Camera.main.ScreenPointToRay (Input.mousePosition);
+		RaycastHit hit;
+		if (Physics.Raycast (ray, out hit,1000f)) {
+			cmrmanage.DeleteCP (hit.collider.gameObject);
+			//Debug.Log (copy.transform.position);
+		}
+
+
 	}
 
 
