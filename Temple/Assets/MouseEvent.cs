@@ -8,6 +8,7 @@ public class MouseEvent : MonoBehaviour
 	public GameObject ControlPoint;
 	public GameObject ColliderPlane;
 	public CatMullRomManage cmrmanage;
+	public ButtonEvent buttonevent;
 
 	// Use this for initialization
 	void Start ()
@@ -19,17 +20,8 @@ public class MouseEvent : MonoBehaviour
 	void Update ()
 	{
 		
-		if (Input.GetMouseButtonDown (0)) {
-			Vector3 mouse_pos = Input.mousePosition;
-			mouse_pos.z = 0.0f;
-			Ray ray = Camera.main.ScreenPointToRay (mouse_pos);
-			RaycastHit hit;
-			//Debug.Log ("mousePosition" + Input.mousePosition);
-			if (Physics.Raycast (ray, out hit)) {
-				cmrmanage.CreateCP (hit.point);
-				//Debug.Log (copy.transform.position);
-			}
-
+		if (Input.GetMouseButtonDown (0) && buttonevent.isadd ) {
+			MouseCreatCP ();
 		}
 
 
@@ -39,9 +31,17 @@ public class MouseEvent : MonoBehaviour
 
 	}
 
-	void MouseCreatCP ()
-	{
-		
+	void MouseCreatCP (){
+		Vector3 mouse_pos = Input.mousePosition;
+		mouse_pos.z = 0.0f;
+		Ray ray = Camera.main.ScreenPointToRay (mouse_pos);
+		RaycastHit hit;
+		//Debug.Log ("mousePosition" + Input.mousePosition);
+		if (Physics.Raycast (ray, out hit,1000f)) {
+			cmrmanage.CreateCP (hit.point);
+			//Debug.Log (copy.transform.position);
+		}
+			
 	}
 
 

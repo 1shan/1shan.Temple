@@ -102,6 +102,17 @@ public class CatMullRomManage : MonoBehaviour
 
 		return pos;
 	}
+	Vector3 CatmullRom_tangent (float t, Vector3 p0, Vector3 p1, Vector3 p2, Vector3 p3)
+	{
+		Vector3 c = 0.5f * (p2 - p0);
+		Vector3 b = 0.5f * (2f * p0 - 5f * p1 + 4f * p2 - p3);
+		Vector3 a = 0.5f * (-p0 + 3f * p1 - 3f * p2 + p3);
+
+		Vector3 tv =  c + 2*(b * t * t) + 3*(a * t * t * t);
+
+		return tv;
+	}
+
 
 	void Renderspline ()
 	{
@@ -113,6 +124,8 @@ public class CatMullRomManage : MonoBehaviour
 
 
 	}
+
+
 
 	public void MoveCP (GameObject obj, Vector3 point)
 	{//未完成移動物件
