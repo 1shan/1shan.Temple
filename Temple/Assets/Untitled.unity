@@ -238,6 +238,9 @@ MonoBehaviour:
   cmrmanage: {fileID: 914196328}
   buttonevent: {fileID: 860377378}
   chooseOBJ: {fileID: 266110051}
+  uilayer:
+    serializedVersion: 2
+    m_Bits: 0
 --- !u!4 &180824621
 Transform:
   m_ObjectHideFlags: 0
@@ -535,7 +538,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 583835983}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 860377378}
+        m_MethodName: RingButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &583835983
@@ -916,7 +930,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1239635387}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.08, y: 3.1, z: -128.5}
+  m_LocalPosition: {x: 0, y: -0.6, z: -43.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -963,9 +977,9 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1308762313}
-  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071067}
-  m_LocalPosition: {x: 0, y: -0, z: -79.9}
-  m_LocalScale: {x: 50, y: 50, z: 50}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 20.8702, y: 18.67358, z: 43.937256}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5

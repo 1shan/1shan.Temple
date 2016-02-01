@@ -37,17 +37,37 @@ public class CatMullRomManage : MonoBehaviour
 
 	void CalCatmullRomSpline ()
 	{	
-		if (controlPointsList.Count == 4) {
-			Debug.Log ("DO ME");
+		if (controlPointsList.Count < 2)
+			return;
+		else if (controlPointsList.Count == 2) {
+			Vector3 cp0pos = controlPointsList [0].position;
+			Vector3 cp1pos = controlPointsList [0].position;
+			Vector3 cp2pos = controlPointsList [1].position;
+			Vector3 cp3pos = controlPointsList [1].position;
+			Vector3 lastpos = Vector3.zero;
+			for (float t = 0; t < 1; t += 0.1f) {
+				Vector3 newpos = ReturnCatmullRom (t, cp0pos, cp1pos, cp2pos, cp3pos);
+				if (t == 0) {
+					lastpos = cp0pos;
+					totalPointList.Add (lastpos);
+					continue;
+				}
+
+				totalPointList.Add (newpos);
+				lastpos = newpos;
+
+			}
+
+		} else if (controlPointsList.Count == 3) {
+			totalPointList.Clear ();
 			//int i = controlPointsList.Count;
 			Vector3 cp0pos = controlPointsList [0].position;
 			Vector3 cp1pos = controlPointsList [1].position;
 			Vector3 cp2pos = controlPointsList [2].position;
-			Vector3 cp3pos = controlPointsList [3].position;
 			Vector3 lastpos = Vector3.zero;
-			
-			Vector3 auxcp_s = endpoint (cp0pos,cp1pos);//輔助點
-			Vector3 auxcp_e = endpoint (cp3pos,cp2pos);
+
+			Vector3 auxcp_s = endpoint (cp0pos, cp1pos);//輔助點
+			Vector3 auxcp_e = endpoint (cp2pos, cp1pos);
 			Debug.Log ("auxcp_s" + auxcp_s);
 			Debug.Log ("auxcp_e" + auxcp_e);
 
@@ -63,8 +83,9 @@ public class CatMullRomManage : MonoBehaviour
 				lastpos = newpos;
 
 			}
+			////
 			for (float t = 0; t < 1; t += 0.1f) {
-				Vector3 newpos = ReturnCatmullRom (t, cp0pos, cp1pos, cp2pos, cp3pos);
+				Vector3 newpos = ReturnCatmullRom (t, cp0pos, cp1pos, cp2pos, auxcp_e);
 				if (t == 0) {
 					lastpos = cp1pos;
 					totalPointList.Add (lastpos);
@@ -73,21 +94,131 @@ public class CatMullRomManage : MonoBehaviour
 
 				totalPointList.Add (newpos);
 				lastpos = newpos;
-
 			}
-////
-			for (float t = 0; t < 1; t += 0.1f) {
-				Vector3 newpos = ReturnCatmullRom (t, cp1pos, cp2pos, cp3pos, auxcp_e);
+		}
+		else if (controlPointsList.Count > 3) {
+			totalPointList.Clear();
+			Vector3 cp0pos, cp1pos, cp2pos,cp4pos,cp5pos,cp6pos;
+			Vector3 p0, p1, p2, p3;
+			cp0pos = controlPointsList [0].transform.position;
+			cp1pos = controlPointsList [1].transform.position;
+			cp2pos = controlPointsList [2].transform.position;
+
+			Vector3 auxcp_s = endpoint (cp0pos, cp1pos);//輔助點
+			Vector3 auxcp_e = endpoint (cp2pos, cp1pos);
+			Vector3 lastpos = Vector3.zero;
+			// first time
+			for (float t = 0; t < 1; t += 0.05f) {
+				Vector3 newpos = ReturnCatmullRom (t, auxcp_s, cp0pos, cp1pos, cp2pos);
 				if (t == 0) {
-					lastpos = cp2pos;
+					lastpos = cp0pos;
 					totalPointList.Add (lastpos);
 					continue;
 				}
 
 				totalPointList.Add (newpos);
 				lastpos = newpos;
-//
+
 			}
+
+			for (int i = 0; i < controlPointsList.Count - 3; i++) {
+				p0 = controlPointsList [i].transform.position;
+				p1 = controlPointsList [i + 1].transform.position;
+				p2 = controlPointsList [i + 2].transform.position;
+				p3 = controlPointsList [i + 3].transform.position;
+				for (float t = 0; t < 1; t += 0.05f) {
+					Vector3 newpos = ReturnCatmullRom (t, p0, p1, p2, p3);
+					if (t == 0) {
+						lastpos = p1;
+						totalPointList.Add (lastpos);
+						continue;
+					}
+					totalPointList.Add (newpos);
+					lastpos = newpos;
+				}
+			}
+			//lasttime
+			for (float t = 0; t < 1; t += 0.05f) {
+				int lastnode;
+				lastnode = controlPointsList.Count;
+				cp4pos = controlPointsList[lastnode-3].transform.position;
+				cp5pos = controlPointsList[lastnode-2].transform.position;
+				cp6pos = controlPointsList[lastnode-1].transform.position;
+				Vector3 newpos = ReturnCatmullRom (t,cp4pos,cp5pos, cp6pos,auxcp_e );
+				if (t == 0) {
+					lastpos = cp5pos;
+					totalPointList.Add (lastpos);
+					continue;
+				}
+
+				totalPointList.Add (newpos);
+				lastpos = newpos;
+
+			}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			//int i = controlPointsList.Count;
+//			Vector3 cp0pos = controlPointsList [0].position;
+//			Vector3 cp1pos = controlPointsList [1].position;
+//			Vector3 cp2pos = controlPointsList [2].position;
+//			Vector3 cp3pos = controlPointsList [3].position;
+//			Vector3 lastpos = Vector3.zero;
+//			
+//			Vector3 auxcp_s = endpoint (cp0pos,cp1pos);//輔助點
+//			Vector3 auxcp_e = endpoint (cp3pos,cp2pos);
+//			Debug.Log ("auxcp_s" + auxcp_s);
+//			Debug.Log ("auxcp_e" + auxcp_e);
+//
+//			for (float t = 0; t < 1; t += 0.1f) {
+//				Vector3 newpos = ReturnCatmullRom (t, auxcp_s, cp0pos, cp1pos, cp2pos);
+//				if (t == 0) {
+//					lastpos = cp0pos;
+//					totalPointList.Add (lastpos);
+//					continue;
+//				}
+//
+//				totalPointList.Add (newpos);
+//				lastpos = newpos;
+//
+//			}
+//			for (float t = 0; t < 1; t += 0.1f) {
+//				Vector3 newpos = ReturnCatmullRom (t, cp0pos, cp1pos, cp2pos, cp3pos);
+//				if (t == 0) {
+//					lastpos = cp1pos;
+//					totalPointList.Add (lastpos);
+//					continue;
+//				}
+//
+//				totalPointList.Add (newpos);
+//				lastpos = newpos;
+//
+//			}
+//			for (float t = 0; t < 1; t += 0.1f) {
+//				Vector3 newpos = ReturnCatmullRom (t, cp1pos, cp2pos, cp3pos, auxcp_e);
+//				if (t == 0) {
+//					lastpos = cp2pos;
+//					totalPointList.Add (lastpos);
+//					continue;
+//				}
+//
+//				totalPointList.Add (newpos);
+//				lastpos = newpos;
+////
+//			}
 		}
 		Renderspline();
 	}
@@ -158,6 +289,8 @@ public class CatMullRomManage : MonoBehaviour
 	public void DeleteCP(GameObject obj){
 		
 		Destroy (obj);
+		totalPointList.Clear ();
+
 
 
 
@@ -166,10 +299,26 @@ public class CatMullRomManage : MonoBehaviour
 	public void Ring(){
 		Debug.Log ("Start ring");
 		Vector3 centerPos = controlPointsList [0].position - new Vector3 (0.5f, 0, 0);
-		GameObject clone = Instantiate (this.gameObject, this.transform.position, this.transform.rotation) as GameObject;
-		clone.transform.RotateAround (centerPos, Vector3.up, 90);
+		int number = 4;
+		GameObject g0 = controlPointsList [0].gameObject;
+		GameObject g1 = controlPointsList [1].gameObject;
+		GameObject g2 = controlPointsList [2].gameObject;
+		GameObject g3 = controlPointsList [3].gameObject;
 
-		Debug.Log ("Start ring");
+		for (int i = 1; i < number; i++) {
+			float angle = (float)i * 360 / (float)number;
+			GameObject clone = Instantiate (this.gameObject,this.transform.position,Quaternion.identity) as GameObject;
+			clone.transform.RotateAround (centerPos, Vector3.up, angle);
+
+
+
+
+
+
+
+
+			Debug.Log ("Start ring");
+		}
 
 
 
