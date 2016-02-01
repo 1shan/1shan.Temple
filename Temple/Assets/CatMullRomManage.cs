@@ -15,6 +15,7 @@ public class CatMullRomManage : MonoBehaviour
 	public List<Vector3> totalPointList = new List<Vector3> ();
 	private LineRenderer lineRenderer;
 
+
 	// Use this for initialization
 	void Start ()
 	{
@@ -28,7 +29,7 @@ public class CatMullRomManage : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		
+		//CalCatmullRomSpline ();
 
 		//GameObject CP_Clone = Instantiate (CPoint, Input.mousePosition, Quaternion.identity) as GameObject;
 	}
@@ -157,6 +158,20 @@ public class CatMullRomManage : MonoBehaviour
 	public void DeleteCP(GameObject obj){
 		
 		Destroy (obj);
-	
+
+
+
+
+	}
+	public void Ring(){
+		Debug.Log ("Start ring");
+		Vector3 centerPos = controlPointsList [0].position - new Vector3 (0.5f, 0, 0);
+		GameObject clone = Instantiate (this.gameObject, this.transform.position, this.transform.rotation) as GameObject;
+		clone.transform.RotateAround (centerPos, Vector3.up, 90);
+
+		Debug.Log ("Start ring");
+
+
+
 	}
 }

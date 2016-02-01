@@ -9,27 +9,42 @@ public class ButtonEvent : MonoBehaviour {
 	public Button Button_add;
 	public Button Button_move;
 	public Button Button_del;
+	public Button Button_roofridge;
 	public bool isadd = false;
 	public bool ismove = false;
 	public bool isdel = false;
+	public bool isring = false;
+	public CatMullRomManage cmrmanage;
 	// Use this for initialization
 
 	public void mode_AddCP(){
 		isadd = true;
 		ismove = false;
 		isdel = false;
-		print ("cliked");
+		isring = false;
+		print ("cliked add");
 	}
 	public void mode_MoveCP(){
 		isadd = false;
 		ismove = true;
 		isdel = false;
-		print ("cliked");
+		isring = false;
+
+		print ("cliked move");
 	}
 	public void mode_DelCP(){
 		isadd = false;
 		ismove = false;
 		isdel = true;
-		print ("cliked");
+		isring = false;
+		print ("cliked del");
+	}
+	public void RingButton(){
+		isadd = false;
+		ismove = false;
+		isdel = false;
+		isring = true;
+		print ("cliked ring");
+		cmrmanage.Ring ();
 	}
 }
