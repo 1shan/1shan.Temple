@@ -60,11 +60,6 @@ public class MouseEvent : MonoBehaviour
 		}
 
 
-
-		
-			
-	
-
 	}
 
 	public void MouseCreatCP (){

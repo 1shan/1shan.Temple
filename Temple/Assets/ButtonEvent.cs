@@ -15,6 +15,7 @@ public class ButtonEvent : MonoBehaviour {
 	public bool isdel = false;
 	public bool isring = false;
 	public CatMullRomManage cmrmanage;
+	public int RRnumber;
 	// Use this for initialization
 
 	public void mode_AddCP(){
@@ -45,6 +46,16 @@ public class ButtonEvent : MonoBehaviour {
 		isdel = false;
 		isring = true;
 		print ("cliked ring");
-		cmrmanage.Ring ();
+		cmrmanage.Ring (4);
+	}
+	public void RRaddBotton(){
+		cmrmanage.RRP ();
+
+		
+	}
+	public void RRsubBotton(){
+		cmrmanage.RRS ();
+
+
 	}
 }

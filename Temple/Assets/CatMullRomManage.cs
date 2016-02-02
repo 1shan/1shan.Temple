@@ -10,10 +10,13 @@ public class CatMullRomManage : MonoBehaviour
 	public GameObject CP3;
 	public GameObject ControlPoint;
 
+
 	public Color c1 = Color.white;
 	public List<Transform> controlPointsList = new List<Transform> ();
 	public List<Vector3> totalPointList = new List<Vector3> ();
+	public List<Transform> ridgeList = new List<Transform> ();
 	private LineRenderer lineRenderer;
+	public int RRnumber;
 
 
 	// Use this for initialization
@@ -259,6 +262,8 @@ public class CatMullRomManage : MonoBehaviour
 
 
 
+
+
 	public void MoveCP (GameObject obj, Vector3 point)
 	{//未完成移動物件
 		obj.transform.position = point;
@@ -268,8 +273,9 @@ public class CatMullRomManage : MonoBehaviour
 	{
 		GameObject copy;
 		copy = Instantiate (ControlPoint, point, Quaternion.identity)as GameObject;
+		copy.transform.parent = gameObject.transform;//這樣才能夠用this旋轉屋頂
 		controlPointsList.Add (copy.transform);
-		Debug.Log ("add.");
+		//Debug.Log ("add.");
 		CalCatmullRomSpline ();
 
 	}
@@ -280,8 +286,8 @@ public class CatMullRomManage : MonoBehaviour
 		auxcp.y =(2*cmid.y)-(c2.y);
 		auxcp.z = cmid.z;
 
-		Debug.Log ("cmid" + cmid);
-		Debug.Log ("c2" + c2);
+		//Debug.Log ("cmid" + cmid);
+		//Debug.Log ("c2" + c2);
 
 		return auxcp;
 
@@ -296,31 +302,43 @@ public class CatMullRomManage : MonoBehaviour
 
 
 	}
-	public void Ring(){
-		Debug.Log ("Start ring");
-		Vector3 centerPos = controlPointsList [0].position - new Vector3 (0.5f, 0, 0);
-		int number = 4;
-		GameObject g0 = controlPointsList [0].gameObject;
-		GameObject g1 = controlPointsList [1].gameObject;
-		GameObject g2 = controlPointsList [2].gameObject;
-		GameObject g3 = controlPointsList [3].gameObject;
+	public void Ring(int num){
+		//Debug.Log ("Start ring");
+		Vector3 centerPos = controlPointsList [0].position;
+		//Debug.Log (controlPointsList [0].position);
+		//Debug.Log (centerPos);
+		RRnumber=num;
 
-		for (int i = 1; i < number; i++) {
-			float angle = (float)i * 360 / (float)number;
-			GameObject clone = Instantiate (this.gameObject,this.transform.position,Quaternion.identity) as GameObject;
+	
+		for (int i = 1; i < RRnumber; i++) {
+			float angle = (float)i * 360 / (float)RRnumber;
+			GameObject clone = Instantiate (this.gameObject, this.transform.position, Quaternion.identity) as GameObject;
 			clone.transform.RotateAround (centerPos, Vector3.up, angle);
+			ridgeList.Add (clone.transform);
 
-
-
-
-
-
-
-
-			Debug.Log ("Start ring");
 		}
+		Debug.Log ("ridgeListcount:"+ridgeList.Count);
+	}
+
+	public void RRP(){
+		RRnumber = RRnumber + 1;
 
 
+		for (int i = 0; i < ridgeList.Count; i++) {
+			Destroy (ridgeList [i].gameObject);
+		}
+		ridgeList.Clear ();
+		Ring (RRnumber);
 
+	}
+	public void RRS(){
+		if (RRnumber > 4) {
+			RRnumber = RRnumber - 1;
+			for (int i = 0; i < ridgeList.Count; i++) {
+				Destroy (ridgeList [i].gameObject);
+			}
+			ridgeList.Clear ();
+			Ring (RRnumber);
+		}
 	}
 }
