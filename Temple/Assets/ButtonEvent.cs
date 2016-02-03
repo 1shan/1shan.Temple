@@ -10,10 +10,12 @@ public class ButtonEvent : MonoBehaviour {
 	public Button Button_move;
 	public Button Button_del;
 	public Button Button_roofridge;
+	public Button Button_Beam;
 	public bool isadd = false;
 	public bool ismove = false;
 	public bool isdel = false;
 	public bool isring = false;
+	public bool isBeam = false;
 	public CatMullRomManage cmrmanage;
 	public int RRnumber;
 	// Use this for initialization
@@ -45,7 +47,7 @@ public class ButtonEvent : MonoBehaviour {
 		ismove = false;
 		isdel = false;
 		isring = true;
-		print ("cliked ring");
+		//print ("cliked ring");
 		cmrmanage.Ring (4);
 	}
 	public void RRaddBotton(){
@@ -58,4 +60,10 @@ public class ButtonEvent : MonoBehaviour {
 
 
 	}
+	public void BeamBotton(){
+		isBeam = true;
+
+
+	}
+
 }

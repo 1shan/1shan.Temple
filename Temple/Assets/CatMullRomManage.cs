@@ -17,9 +17,9 @@ public class CatMullRomManage : MonoBehaviour
 	public List<Transform> controlPointsList = new List<Transform> ();
 	public List<Vector3> totalPointList = new List<Vector3> ();
 	public List<Transform> ridgeList = new List<Transform> ();
-	public List<Vector3> EaveobjList = new List<Vector3> ();
-	private LineRenderer lineRenderer;
+	public LineRenderer lineRenderer;
 	public int RRnumber;
+	public Eave_manage eavemanage;
 
 
 	// Use this for initialization
@@ -74,8 +74,8 @@ public class CatMullRomManage : MonoBehaviour
 
 			Vector3 auxcp_s = endpoint (cp0pos, cp1pos);//輔助點
 			Vector3 auxcp_e = endpoint (cp2pos, cp1pos);
-			Debug.Log ("auxcp_s" + auxcp_s);
-			Debug.Log ("auxcp_e" + auxcp_e);
+//			Debug.Log ("auxcp_s" + auxcp_s);
+//			Debug.Log ("auxcp_e" + auxcp_e);
 
 			for (float t = 0; t < 1; t += 0.1f) {
 				Vector3 newpos = ReturnCatmullRom (t, auxcp_s, cp0pos, cp1pos, cp2pos);
@@ -201,12 +201,14 @@ public class CatMullRomManage : MonoBehaviour
 	}
 
 	public void CreateCP (Vector3 point)
-	{
+	{	
 		GameObject copy;
 		copy = Instantiate (ControlPoint, point, Quaternion.identity)as GameObject;
 		copy.transform.parent = gameObject.transform;//這樣才能夠用this旋轉屋頂
 		controlPointsList.Add (copy.transform);
-		//Debug.Log ("add.");
+
+		Debug.Log ("CP:" + copy.transform.position);
+		
 		CalCatmullRomSpline ();
 
 	}
@@ -246,17 +248,18 @@ public class CatMullRomManage : MonoBehaviour
 		//Debug.Log (centerPos);
 		RRnumber = num;
 
-		ridgeList.Add (this.gameObject.transform);//自己也要加入
+		//ridgeList.Add (this.gameObject.transform);//自己也要加入
 		for (int i = 1; i < RRnumber; i++) {
 			float angle = (float)i * 360 / (float)RRnumber;
 			GameObject clone = Instantiate (this.gameObject, this.transform.position, Quaternion.identity) as GameObject;
 			clone.transform.parent = ridge.transform;
 			clone.transform.RotateAround (centerPos, Vector3.up, angle);
 			ridgeList.Add (clone.transform);
-
 		}
-		Debug.Log ("ridgeListcount:" + ridgeList.Count);
-		EaveCPconnect ();
+		eavemanage.eavepointconnect ();
+		//Debug.Log ("ridgeListcount:" + ridgeList.Count);
+		//EaveCPconnect ();
+
 	}
 
 	public void RRP ()
@@ -268,6 +271,11 @@ public class CatMullRomManage : MonoBehaviour
 			Destroy (ridgeList [i].gameObject);
 		}
 		ridgeList.Clear ();
+		for (int i = 1; i < eavemanage.EaveobjList.Count-1; i++) {
+			Destroy (eavemanage.EaveobjList[i].gameObject);
+		}
+		eavemanage.EaveobjList.Clear ();
+
 		Ring (RRnumber);
 
 	}
@@ -280,6 +288,12 @@ public class CatMullRomManage : MonoBehaviour
 				Destroy (ridgeList [i].gameObject);
 			}
 			ridgeList.Clear ();
+			for (int i = 1; i < eavemanage.EaveobjList.Count-1; i++) {
+				Destroy (eavemanage.EaveobjList[i].gameObject);
+			}
+			eavemanage.EaveobjList.Clear ();
+
+
 			Ring (RRnumber);
 		}
 	}
@@ -287,43 +301,59 @@ public class CatMullRomManage : MonoBehaviour
 	public void EaveCPconnect ()
 	{
 		
-		int i = controlPointsList.Count;//cp last node
-		Vector2 eavepoint;
-		Vector3 pos = controlPointsList [i - 1].transform.position;
-		Vector3 centerPos = controlPointsList [0].position;
-		centerPos.y = pos.y;
-		EaveobjList.Add (pos);//他自己
 
-		Debug.Log ("centerPos" + centerPos);
-		Debug.Log ("Eavepoint1" + pos);
-
-		for (int x = 0; x < RRnumber-1; x++) {//旋轉點的位置
-			float angle = (float)x * 360 / (float)RRnumber;
-			Vector3 dir = pos - centerPos;
-			eavepoint = angle * dir  ;
-
-
-
-			EaveobjList.Add (eavepoint);
-			Debug.Log ("eavepoint" + eavepoint);
-		}
-
-
-//		for (int eave = 1; eave < RRnumber; eave++) {
-//			float angle = (float)eave * 360 / (float)RRnumber;
-//			GameObject clone = Instantiate (obj.gameObject, obj.transform.position, Quaternion.identity) as GameObject;
-//			clone.transform.parent = Eave.transform;
-//			clone.transform.RotateAround (centerPos, Vector3.up, angle);
-//			EaveobjList.Add (clone.transform.position);
-//			}
-//		Debug.Log ("eaveobjListcount:" + EaveobjList.Count);
-//		lineRenderer.SetVertexCount (EaveobjList.Count);
-//		for (int j = 0; j < EaveobjList.Count; j++) {
-//			lineRenderer.SetPosition (j, EaveobjList [j]);
+//		RRnumber = 4;
+//		int i = controlPointsList.Count;//cp last node
+//		Vector3 eavepoint = Vector3.zero;
+//		Vector3 pos = controlPointsList [i - 1].transform.position;
+//		Vector3 centerPos0 = Vector3.zero;
+//		Vector3 centerPos1 = controlPointsList [0].position;
+//
+//
+//
+//		Debug.Log ("position:" + pos);
+//		Debug.Log ("centerPos0:" + centerPos0);
+//		Debug.Log ("centerPos1:" + centerPos1);
+//
+//
+//		for (int x = 0; x < RRnumber+1; x++) {//旋轉點的位置
+//			eavepoint = Quaternion.AngleAxis (-90*x,centerPos0) * pos; 
+//			Eave.transform.parent = Eave.transform;
+//			EaveobjList.Add (eavepoint);
 //		}
+//		eavemanage.eavepointconnect ();
+
+		//Debug.Log ("eavepoint" + eavepoint);
+
+		//}
+
+
+//		Debug.Log ("eaveobjListcount:" + EaveobjList.Count);
+
 
 	}
-
-
+	//	Vector3 pos = Vector3.zero;
+	//	pos.x = 1.0f;
+	//	pos.y = 0.0f;
+	//	pos.z = 0.0f;
+	//	Debug.Log ("position:" + pos);
+	//	EaveobjList.Add (pos);
+	//
+	//	pos = Quaternion.Euler (0, 90, 0) * pos;
+	//	EaveobjList.Add (pos);
+	//	Debug.Log ("afterposition:" + pos);
+	//
+	//	pos = Quaternion.Euler (0, 90, 0) * pos;
+	//	EaveobjList.Add (pos);
+	//	Debug.Log ("afterposition:" + pos);
+	//
+	//	pos = Quaternion.Euler (0, 90, 0) * pos;
+	//	EaveobjList.Add (pos);
+	//	Debug.Log ("afterposition:" + pos);
+	//
+	//	pos = Quaternion.Euler (0, 90, 0) * pos;
+	//	EaveobjList.Add (pos);
+	//	Debug.Log ("afterposition:" + pos);
 
 }
+

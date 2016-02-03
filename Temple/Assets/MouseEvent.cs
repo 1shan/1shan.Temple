@@ -8,6 +8,7 @@ public class MouseEvent : MonoBehaviour
 	public GameObject ControlPoint;
 	public GameObject ColliderPlane;
 	public CatMullRomManage cmrmanage;
+	public BeamControl beamcontrol;
 	public ButtonEvent buttonevent;
 	public GameObject chooseOBJ = null;
 	float x, y;
@@ -57,6 +58,9 @@ public class MouseEvent : MonoBehaviour
 		if (Input.GetMouseButtonDown (0) && buttonevent.isdel ) {
 			MouseDeleteCP ();
 
+		}
+		if (Input.GetMouseButtonDown (0) && buttonevent.isBeam) {
+			beamcontrol.SetBeam ();
 		}
 
 
