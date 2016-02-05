@@ -940,6 +940,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cmrmanage: {fileID: 914196328}
   EaveobjList: []
+  Beam_clone: {fileID: 0}
 --- !u!120 &785107429
 LineRenderer:
   m_ObjectHideFlags: 0
@@ -1017,6 +1018,7 @@ MonoBehaviour:
   isring: 0
   isBeam: 0
   cmrmanage: {fileID: 914196328}
+  beamcontrol: {fileID: 1166733288}
   RRnumber: 0
 --- !u!4 &860377379
 Transform:
@@ -1061,7 +1063,7 @@ MonoBehaviour:
   CP0: {fileID: 534860733}
   CP1: {fileID: 0}
   CP2: {fileID: 0}
-  CP3: {fileID: 0}
+  beamset: {fileID: 1166733287}
   ControlPoint: {fileID: 534860733}
   Eave: {fileID: 785107426}
   ridge: {fileID: 1239857263}
@@ -1072,6 +1074,7 @@ MonoBehaviour:
   lineRenderer: {fileID: 0}
   RRnumber: 0
   eavemanage: {fileID: 785107428}
+  beamcontrol: {fileID: 1166733288}
 --- !u!4 &914196329
 Transform:
   m_ObjectHideFlags: 0
@@ -1141,6 +1144,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 1166733289}
   - 114: {fileID: 1166733288}
+  - 120: {fileID: 1166733290}
   m_Layer: 0
   m_Name: BeamSet
   m_TagString: Untagged
@@ -1160,9 +1164,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Beam_ControlPoint: {fileID: 534860733}
-  BeamSet: {fileID: 1166733287}
-  cmrmanage: {fileID: 0}
+  cmrmanage: {fileID: 914196328}
+  eavemanage: {fileID: 785107428}
+  Beam_clone: {fileID: 1166733287}
+  beamcontrol: {fileID: 1166733288}
   BeamCPList: []
+  RingBeamlist: []
+  number: 3
+  lenthOfBeam: 2
 --- !u!4 &1166733289
 Transform:
   m_ObjectHideFlags: 0
@@ -1175,6 +1184,45 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
+--- !u!120 &1166733290
+LineRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1166733287}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 1
+  m_Materials:
+  - {fileID: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_UseLightProbes: 1
+  m_ReflectionProbeUsage: 1
+  m_ProbeAnchor: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Positions:
+  - {x: 0, y: 0, z: 0}
+  - {x: 0, y: 0, z: 1}
+  m_Parameters:
+    startWidth: 0.1
+    endWidth: 0.1
+    m_StartColor:
+      serializedVersion: 2
+      rgba: 4294967295
+    m_EndColor:
+      serializedVersion: 2
+      rgba: 4294967295
+  m_UseWorldSpace: 1
 --- !u!1 &1239635387
 GameObject:
   m_ObjectHideFlags: 0
@@ -1422,6 +1470,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1166733288}
+        m_MethodName: SetBeam
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 0
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &1375783601

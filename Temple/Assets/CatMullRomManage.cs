@@ -7,7 +7,7 @@ public class CatMullRomManage : MonoBehaviour
 	public GameObject CP0;
 	public GameObject CP1;
 	public GameObject CP2;
-	public GameObject CP3;
+	public GameObject beamset;
 	public GameObject ControlPoint;
 	public GameObject Eave;
 	public GameObject ridge;
@@ -17,9 +17,11 @@ public class CatMullRomManage : MonoBehaviour
 	public List<Transform> controlPointsList = new List<Transform> ();
 	public List<Vector3> totalPointList = new List<Vector3> ();
 	public List<Transform> ridgeList = new List<Transform> ();
+
 	public LineRenderer lineRenderer;
 	public int RRnumber;
 	public Eave_manage eavemanage;
+	public BeamControl beamcontrol;
 
 
 	// Use this for initialization
@@ -256,6 +258,7 @@ public class CatMullRomManage : MonoBehaviour
 			clone.transform.RotateAround (centerPos, Vector3.up, angle);
 			ridgeList.Add (clone.transform);
 		}
+
 		eavemanage.eavepointconnect ();
 		//Debug.Log ("ridgeListcount:" + ridgeList.Count);
 		//EaveCPconnect ();
@@ -298,6 +301,21 @@ public class CatMullRomManage : MonoBehaviour
 		}
 	}
 
+	public void RingBeams(){
+		Vector3 centerpos1 = eavemanage.EaveobjList [0].position;
+		Vector3 centerpos = controlPointsList [0].position;
+		centerpos.y = centerpos1.y;
+		beamcontrol.RingBeamlist.Add (beamcontrol.Beam_clone);
+		for (int i = 1; i < RRnumber; i++) {
+			float angle = (float)i * 360 / (float)RRnumber;
+			GameObject clone = Instantiate (beamcontrol.Beam_clone, beamcontrol.Beam_clone.transform.position, Quaternion.identity) as GameObject;
+			clone.transform.RotateAround (centerpos, Vector3.up, angle);
+			clone.GetComponent<BeamControl> ().RenderBeams ();
+			clone.transform.parent = beamset.transform;
+			beamcontrol.RingBeamlist.Add (clone);
+
+		}
+	}
 	public void EaveCPconnect ()
 	{
 		

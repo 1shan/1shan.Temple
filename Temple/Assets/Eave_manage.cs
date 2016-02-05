@@ -6,6 +6,7 @@ public class Eave_manage : MonoBehaviour {
 	public CatMullRomManage cmrmanage;
 	private LineRenderer lineRenderer;
 	public List<Transform> EaveobjList = new List<Transform> ();
+	public GameObject Beam_clone;
 
 
 	// Use this for initialization

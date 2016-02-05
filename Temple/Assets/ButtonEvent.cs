@@ -17,6 +17,7 @@ public class ButtonEvent : MonoBehaviour {
 	public bool isring = false;
 	public bool isBeam = false;
 	public CatMullRomManage cmrmanage;
+	public BeamControl beamcontrol;
 	public int RRnumber;
 	// Use this for initialization
 
@@ -51,17 +52,27 @@ public class ButtonEvent : MonoBehaviour {
 		cmrmanage.Ring (4);
 	}
 	public void RRaddBotton(){
-		cmrmanage.RRP ();
+		if (isring) {
+			cmrmanage.RRP ();
+		}
+
+
 
 		
 	}
 	public void RRsubBotton(){
-		cmrmanage.RRS ();
+		if (isring) {
+			cmrmanage.RRS ();
+		}
+
 
 
 	}
 	public void BeamBotton(){
 		isBeam = true;
+		isring = false;
+		beamcontrol.SetBeam ();
+		cmrmanage.RingBeams ();
 
 
 	}

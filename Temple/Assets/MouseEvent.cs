@@ -59,9 +59,7 @@ public class MouseEvent : MonoBehaviour
 			MouseDeleteCP ();
 
 		}
-		if (Input.GetMouseButtonDown (0) && buttonevent.isBeam) {
-			beamcontrol.SetBeam ();
-		}
+
 
 
 	}
