@@ -2302,6 +2302,7 @@ GameObject:
   m_Component:
   - 4: {fileID: 2085355462}
   - 23: {fileID: 2085355461}
+  - 33: {fileID: 2085355463}
   - 114: {fileID: 2085355460}
   m_Layer: 0
   m_Name: MeshManage
@@ -2318,7 +2319,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2085355459}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09d33f2826f274c1cb71885e24d6405b, type: 3}
+  m_Script: {fileID: 11500000, guid: a138b675f023841dcaec87c6731b0b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!23 &2085355461
@@ -2359,3 +2360,10 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
+--- !u!33 &2085355463
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2085355459}
+  m_Mesh: {fileID: 0}
