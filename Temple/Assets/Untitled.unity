@@ -1018,6 +1018,7 @@ MonoBehaviour:
   isring: 0
   isBeam: 0
   cmrmanage: {fileID: 914196328}
+  roof: {fileID: 2085355460}
   beamcontrol: {fileID: 1166733288}
   RRnumber: 0
 --- !u!4 &860377379
@@ -2322,8 +2323,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a138b675f023841dcaec87c6731b0b78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  catmullromanage: {fileID: 914196328}
-  ridgeList: []
+  catmullrommanage: {fileID: 914196328}
 --- !u!23 &2085355461
 MeshRenderer:
   m_ObjectHideFlags: 0

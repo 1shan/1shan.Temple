@@ -3,28 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 
 
-public class roof : MonoBehaviour {
+public class Roof : MonoBehaviour {
 
 	// Use this for initialization
 
-	public CatMullRomManage catmullromanage;
-	public List<Transform> ridgeList = new List<Transform> ();
+	public CatMullRomManage catmullrommanage;
 
-	void Start () {
-		 
 
-	}
 
 	public void RoofTrinangle(){
 		MeshFilter mf = GetComponent<MeshFilter> ();
 		Mesh mesh = mf.mesh;
-		ridgeList = catmullromanage.ridgeList;
-		if (ridgeList.Count < 2) return;
-		int number = ridgeList.Count*catmullromanage.totalPointList.Count;
+
+		int number = catmullrommanage.ridgeList.Count*catmullrommanage.totalPointList.Count;
 		Vector3[] vertices = new Vector3[number];
-		vertices [0] = ridgeList [0].GetComponent<CatMullRomManage> ().totalPointList [0];
-		vertices [1] = ridgeList [1].GetComponent<CatMullRomManage> ().totalPointList [5];
-		vertices [2] = ridgeList [0].GetComponent<CatMullRomManage> ().totalPointList [5];
+		for (int i = 0; i < catmullrommanage.ridgeList.Count; i++) {
+			for (int j = 0;j<catmullrommanage.totalPointList.Count;j++)
+
+				vertices [i * catmullrommanage.totalPointList.Count + j] = catmullrommanage.ridgeList [i].GetComponent<CatMullRomManage> ().totalPointList [j];
+		}
+		//Debug.Log (number);
 
 
 
@@ -45,7 +43,7 @@ public class roof : MonoBehaviour {
 		mesh.Optimize ();
 		mesh.RecalculateNormals ();
 			
-		}
+	}
 
 //		Vector3[] vertices = new Vector3[] {
 //

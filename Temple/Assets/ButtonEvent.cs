@@ -17,6 +17,7 @@ public class ButtonEvent : MonoBehaviour {
 	public bool isring = false;
 	public bool isBeam = false;
 	public CatMullRomManage cmrmanage;
+	public Roof roof;
 	public BeamControl beamcontrol;
 	public int RRnumber;
 	// Use this for initialization
@@ -50,6 +51,8 @@ public class ButtonEvent : MonoBehaviour {
 		isring = true;
 		//print ("cliked ring");
 		cmrmanage.Ring (4);
+		roof.RoofTrinangle ();
+
 	}
 	public void RRaddBotton(){
 		if (isring) {
