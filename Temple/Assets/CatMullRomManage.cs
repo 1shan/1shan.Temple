@@ -22,6 +22,7 @@ public class CatMullRomManage : MonoBehaviour
 	public int RRnumber;
 	public Eave_manage eavemanage;
 	public BeamControl beamcontrol;
+	public Roof roof;
 
 
 	// Use this for initialization
@@ -209,7 +210,7 @@ public class CatMullRomManage : MonoBehaviour
 		copy.transform.parent = gameObject.transform;//這樣才能夠用this旋轉屋頂
 		controlPointsList.Add (copy.transform);
 
-		Debug.Log ("CP:" + copy.transform.position);
+		//Debug.Log ("CP:" + copy.transform.position);
 		
 		CalCatmullRomSpline ();
 
@@ -262,6 +263,7 @@ public class CatMullRomManage : MonoBehaviour
 		eavemanage.eavepointconnect ();
 		//Debug.Log ("ridgeListcount:" + ridgeList.Count);
 		//EaveCPconnect ();
+
 
 	}
 
