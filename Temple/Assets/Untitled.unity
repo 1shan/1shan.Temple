@@ -1076,6 +1076,7 @@ MonoBehaviour:
   RRnumber: 0
   eavemanage: {fileID: 785107428}
   beamcontrol: {fileID: 1166733288}
+  catmullrommanage: {fileID: 914196328}
   roof: {fileID: 2085355460}
 --- !u!4 &914196329
 Transform:
@@ -2324,6 +2325,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   catmullrommanage: {fileID: 914196328}
+  roof_meshlist: []
+  ringMirrorSplineList: []
 --- !u!23 &2085355461
 MeshRenderer:
   m_ObjectHideFlags: 0

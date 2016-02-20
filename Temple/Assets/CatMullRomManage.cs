@@ -16,12 +16,13 @@ public class CatMullRomManage : MonoBehaviour
 	public Color c1 = Color.white;
 	public List<Transform> controlPointsList = new List<Transform> ();
 	public List<Vector3> totalPointList = new List<Vector3> ();
-	public List<Transform> ridgeList = new List<Transform> ();
+	public List<GameObject> ridgeList = new List<GameObject> ();
 
 	public LineRenderer lineRenderer;
 	public int RRnumber;
 	public Eave_manage eavemanage;
 	public BeamControl beamcontrol;
+	public CatMullRomManage catmullrommanage;
 	public Roof roof;
 
 
@@ -255,9 +256,9 @@ public class CatMullRomManage : MonoBehaviour
 		for (int i = 1; i < RRnumber; i++) {
 			float angle = (float)i * 360 / (float)RRnumber;
 			GameObject clone = Instantiate (this.gameObject, this.transform.position, Quaternion.identity) as GameObject;
-			clone.transform.parent = ridge.transform;
+
 			clone.transform.RotateAround (centerPos, Vector3.up, angle);
-			ridgeList.Add (clone.transform);
+			ridgeList.Add (clone);
 		}
 
 		eavemanage.eavepointconnect ();
