@@ -22,7 +22,6 @@ public class CatMullRomManage : MonoBehaviour
 	public int RRnumber;
 	public Eave_manage eavemanage;
 	public BeamControl beamcontrol;
-	public ButtonEvent buttonevent;
 	public CatMullRomManage catmullrommanage;
 	public Roof roof;
 
@@ -46,7 +45,7 @@ public class CatMullRomManage : MonoBehaviour
 	}
 
 
-	public void CalCatmullRomSpline ()
+	void CalCatmullRomSpline ()
 	{	
 		if (controlPointsList.Count < 2)
 			return;
@@ -253,9 +252,7 @@ public class CatMullRomManage : MonoBehaviour
 		//Debug.Log (centerPos);
 		RRnumber = num;
 
-
-			//ridgeList.Add (this.gameObject);//自己也要加入
-		
+		//ridgeList.Add (this.gameObject.transform);//自己也要加入
 		for (int i = 1; i < RRnumber; i++) {
 			float angle = (float)i * 360 / (float)RRnumber;
 			GameObject clone = Instantiate (this.gameObject, this.transform.position, Quaternion.identity) as GameObject;
