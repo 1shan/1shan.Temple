@@ -51,13 +51,16 @@ public class ButtonEvent : MonoBehaviour {
 		isring = true;
 		//print ("cliked ring");
 		cmrmanage.Ring (4);
+<<<<<<< HEAD
 
+=======
+		roof.RoofTrinangle ();
+>>>>>>> origin/master
 
 	}
 	public void RRaddBotton(){
 		if (isring) {
 			cmrmanage.RRP ();
-
 		}
 
 
@@ -67,7 +70,6 @@ public class ButtonEvent : MonoBehaviour {
 	public void RRsubBotton(){
 		if (isring) {
 			cmrmanage.RRS ();
-
 		}
 
 
