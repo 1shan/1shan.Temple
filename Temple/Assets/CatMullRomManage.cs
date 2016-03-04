@@ -254,7 +254,7 @@ public class CatMullRomManage : MonoBehaviour
 		RRnumber = num;
 
 
-			//ridgeList.Add (this.gameObject);//自己也要加入
+			ridgeList.Add (this.gameObject);//自己也要加入
 		
 		for (int i = 1; i < RRnumber; i++) {
 			float angle = (float)i * 360 / (float)RRnumber;
@@ -264,10 +264,10 @@ public class CatMullRomManage : MonoBehaviour
 			ridgeList.Add (clone);
 		}
 
-		eavemanage.eavepointconnect ();
+		//eavemanage.eavepointconnect ();
 		//Debug.Log ("ridgeListcount:" + ridgeList.Count);
 		//EaveCPconnect ();
-
+		roof.RoofTrinangle ();
 
 	}
 
@@ -276,10 +276,11 @@ public class CatMullRomManage : MonoBehaviour
 		RRnumber = RRnumber + 1;
 
 
-		for (int i = 0; i < ridgeList.Count; i++) {
+		for (int i = 1; i < ridgeList.Count; i++) {
 			Destroy (ridgeList [i].gameObject);
 		}
 		ridgeList.Clear ();
+
 		for (int i = 1; i < eavemanage.EaveobjList.Count-1; i++) {
 			Destroy (eavemanage.EaveobjList[i].gameObject);
 		}
@@ -287,13 +288,14 @@ public class CatMullRomManage : MonoBehaviour
 
 		Ring (RRnumber);
 
+
 	}
 
 	public void RRS ()
 	{
 		if (RRnumber > 4) {
 			RRnumber = RRnumber - 1;
-			for (int i = 0; i < ridgeList.Count; i++) {
+			for (int i = 1; i < ridgeList.Count; i++) {
 				Destroy (ridgeList [i].gameObject);
 			}
 			ridgeList.Clear ();
@@ -301,7 +303,6 @@ public class CatMullRomManage : MonoBehaviour
 				Destroy (eavemanage.EaveobjList[i].gameObject);
 			}
 			eavemanage.EaveobjList.Clear ();
-
 
 			Ring (RRnumber);
 		}
